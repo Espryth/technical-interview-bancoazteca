@@ -1,0 +1,169 @@
+swagger: "2.0"
+info:
+  title: "Invoice Service"
+  version: "1.0.0"
+host: "localhost:8100"
+basePath: "/api/invoices"
+tags:
+  - name: "invoices"
+    description: "Invoice operations"
+schemes:
+  - "http"
+paths:
+  /create:
+    post:
+      tags:
+        - "invoices"
+      summary: "Create a new invoice for a client"
+      operationId: "createInvoice"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "invoice"
+          required: true
+          schema:
+            $ref: "#/definitions/Invoice"
+      responses:
+        200:
+          description: "Invoice created"
+          schema:
+            $ref: "#/definitions/Invoice"
+        400:
+          description: "Client not found"
+          schema:
+            type: "string"
+  /update/{id}:
+    put:
+      tags:
+        - "invoices"
+      summary: "Update an invoice"
+      description: "Updates invoice amount and/or description"
+      operationId: "updateInvoice"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Invoice id to update"
+          required: true
+          type: "number"
+        - in: "body"
+          name: "invoice"
+          required: true
+          schema:
+            $ref: "#/definitions/Invoice"
+      responses:
+        200:
+          description: "Invoice updated"
+          schema:
+            $ref: "#/definitions/Invoice"
+        404:
+          description: "Invoice not found"
+          schema:
+            type: "string"
+  /delete/{id}:
+    delete:
+      tags:
+        - "invoices"
+      summary: "Delete an invoice"
+      operationId: "deleteInvoice"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Invoice id to delete"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Invoice deleted"
+          schema:
+            $ref: "#/definitions/Invoice"
+        404:
+          description: "Invoice not found"
+          schema:
+            type: "string"
+  /delete/client/{clientId}:
+    delete:
+      tags:
+        - "invoices"
+      summary: "Delete all invoices for a client"
+      operationId: "deleteClientInvoices"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "clientId"
+          description: "Client id to delete invoices for"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "How many invoices were deleted"
+          schema:
+            type: "number"
+  /get/{id}:
+    get:
+      tags:
+        - "invoices"
+      summary: "Get an invoice"
+      operationId: "getInvoice"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Invoice id to get"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Invoice found"
+          schema:
+            $ref: "#/definitions/Invoice"
+        404:
+          description: "Invoice not found"
+          schema:
+            type: "string"
+  /get/client/{clientId}:
+    get:
+      tags:
+        - "invoices"
+      summary: "Get all invoices for a client"
+      operationId: "getClientInvoices"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "clientId"
+          description: "Client id to get invoices for"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Invoices found"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Invoice"
+definitions:
+  Invoice:
+    type: "object"
+    properties:
+      id:
+        type: "number"
+      clientId:
+        type: "number"
+      amount:
+        type: "number"
+      description:
+        type: "string"
+
+
+

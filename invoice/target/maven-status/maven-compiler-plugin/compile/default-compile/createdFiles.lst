@@ -1,0 +1,7 @@
+me\javierca\invoice\client\ClientFeignClient.class
+me\javierca\invoice\controller\InvoiceController.class
+me\javierca\invoice\dto\ClientDTO.class
+me\javierca\invoice\service\InvoiceService.class
+me\javierca\invoice\InvoiceApplication.class
+me\javierca\invoice\entity\Invoice.class
+me\javierca\invoice\repository\InvoiceRepository.class

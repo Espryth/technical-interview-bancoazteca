@@ -1,0 +1,6 @@
+me\javierca\client\entity\Client.class
+me\javierca\client\service\ClientService.class
+me\javierca\client\repository\ClientRepository.class
+me\javierca\client\controller\ClientController.class
+me\javierca\client\ClientApplication.class
+me\javierca\client\entity\Gender.class

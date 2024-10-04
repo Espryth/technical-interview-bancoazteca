@@ -1,0 +1,129 @@
+swagger: "2.0"
+info:
+  title: "Client Service"
+  version: "1.0.0"
+host: "localhost:8090"
+basePath: "/api/clients"
+tags:
+  - name: "clients"
+    description: "Client operations"
+schemes:
+  - "http"
+paths:
+  /create:
+    post:
+      tags:
+        - "client"
+      summary: "Create a new client"
+      operationId: "createClient"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "client"
+          required: true
+          schema:
+            $ref: "#/definitions/Client"
+      responses:
+        200:
+          description: "Client created"
+          schema:
+            type: "number"
+        409:
+          description: "Client already exists"
+          schema:
+            type: "string"
+  /delete/{id}:
+    delete:
+      tags:
+        - "client"
+      summary: "Delete a client"
+      operationId: "deleteClient"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Client id to delete"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Client deleted"
+          schema:
+            $ref: "#/definitions/Client"
+        404:
+          description: "Client not found"
+          schema:
+            type: "string"
+  /get/{id}:
+    get:
+      tags:
+        - "client"
+      summary: "Get a client"
+      operationId: "getClient"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "Client id to get"
+          required: true
+          type: "number"
+      responses:
+        200:
+          description: "Client found"
+          schema:
+            $ref: "#/definitions/Client"
+        404:
+          description: "Client not found"
+          schema:
+            type: "string"
+  /get:
+    get:
+      tags:
+        - "client"
+      summary: "Get all clients"
+      operationId: "getClients"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Clients found"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Client"
+definitions:
+  Client:
+    type: "object"
+    required:
+      - "name"
+      - "email"
+      - "paternalSurname"
+      - "maternalSurname"
+      - "email"
+      - "phone"
+      - "birthDate"
+    properties:
+      id:
+        type: "number"
+      name:
+        type: "string"
+      paternalSurname:
+        type: "string"
+      maternalSurname:
+        type: "string"
+      email:
+        type: "string"
+      phone:
+        type: "string"
+      birthDate:
+        type: "string"
+      gender:
+        type: "string"
+
+
+
